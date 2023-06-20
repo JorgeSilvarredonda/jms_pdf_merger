@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from PyPDF2 import PdfMerger
+from PIL import Image, ImageTk
 
 # Ahora almacenaremos los nombres de archivo en estas variables
 file1 = None
@@ -8,23 +9,31 @@ file2 = None
 
 root = tk.Tk()
 root.title("PDF Merger")
-root.geometry("250x100") #Dimensiones
+root.geometry("250x310") #Dimensiones
 root.iconbitmap('pdf.ico')
-root.configure(bg="#ff1f48")
-label1 = tk.Label(root, text="Not Selected",bg="#ff1f48")
-label2 = tk.Label(root, text="Not Selected",bg="#ff1f48")
-label1.grid(row=0, column=1)
-label2.grid(row=1, column=1)
+root.configure(bg="#FFABAB")
+
+# Disable window resizing
+root.resizable(False, False)
+
+# Crea un frame para contener los elementos
+frame = tk.Frame(root, bg="#FFABAB")
+frame.pack(expand=True, fill="both", padx=20, pady=20)
+
+# Load the image
+image = Image.open("photo.png")
+image = image.resize((100, 100), Image.ANTIALIAS)
+photo = ImageTk.PhotoImage(image)
 
 def browse_file_1():
     global file1  # Usa la variable global file1
     file1 = filedialog.askopenfilename(filetypes=(("PDF files", "*.pdf"),("All files", "*.*")))
-    label1.setvar("File 1: " + file1 + ".pdf")
+    label1.config(text="File 1: " + file1 + ".pdf")
 
 def browse_file_2():
     global file2  # Usa la variable global file2
     file2 = filedialog.askopenfilename(filetypes=(("PDF files", "*.pdf"),("All files", "*.*")))
-    label2.setvar("File 1: " + file2 + ".pdf")
+    label2.config(text="File 1: " + file2 + ".pdf")
 
 def merge_pdfs():
     if file1 is None or file2 is None:  # Si no se seleccionaron archivos, no hagas nada
@@ -40,16 +49,28 @@ def merge_pdfs():
     pdf_merger.write(output)
     pdf_merger.close()
 
-canvas = tk.Canvas(root, width=200, height=200, bd=0, highlightthickness=0)
-canvas.pack()
+button1 = tk.Button(frame, text="Select 1st PDF", command=browse_file_1)
+button1.pack(pady=5)  # Espaciado vertical
 
-button1 = tk.Button(root, text="Seleccionar PDF 1", command=browse_file_1)
-button1.grid(row=0, column=0)  # Posiciona en la primera fila, primera columna
+# Crea etiquetas de texto
+label1 = tk.Label(frame, text="Not Selected", bg="#FFABAB")
+label1.pack()
 
-button2 = tk.Button(root, text="Seleccionar PDF 2", command=browse_file_2)
-button2.grid(row=1, column=0)  # Posiciona en la segunda fila, primera columna
+button2 = tk.Button(frame, text="Select 2nd PDF", command=browse_file_2)
+button2.pack(pady=5)  # Espaciado vertical
 
-button3 = tk.Button(root, text="Unir PDFs", command=merge_pdfs)
-button3.grid(row=2, column=0)  # Posiciona en la tercera fila, primera columna
+label2 = tk.Label(frame, text="Not Selected", bg="#FFABAB")
+label2.pack()
+
+# Crea una etiqueta con la imagen
+labelPhoto = tk.Label(frame, image=photo, bg="#FFABAB")
+labelPhoto.pack(pady=10)  # Espaciado vertical
+
+button3 = tk.Button(frame, text="Merge PDFs", command=merge_pdfs)
+button3.pack(pady=5)  # Espaciado vertical
+
+
+
+
 
 root.mainloop()
