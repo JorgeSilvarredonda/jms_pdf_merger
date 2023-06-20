@@ -9,4 +9,4 @@ A simple software to merge **two** .pdf files into **one**.
  - Press "Merge"
 Thats it!
 
-If you notice any bug, please contact me on Discord! (My id:**jmsfla**)
+If you notice any bug, please contact me on Discord! (My id: **jmsfla**)
