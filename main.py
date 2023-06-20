@@ -69,8 +69,4 @@ labelPhoto.pack(pady=10)  # Espaciado vertical
 button3 = tk.Button(frame, text="Merge PDFs", command=merge_pdfs)
 button3.pack(pady=5)  # Espaciado vertical
 
-
-
-
-
 root.mainloop()
