@@ -2,6 +2,10 @@
 
 A simple software to merge **two** .pdf files into **one**.
 
+**Dependencies:**
+ - tkinter
+ - PdfMerger
+
 **Instructions:**
  - Just open the program
  - Select the 2 files
@@ -11,4 +15,4 @@ Thats it!
 
 If you notice any bug, please contact me on Discord! (My id: **jmsfla**)
 
-Change 1.
+
